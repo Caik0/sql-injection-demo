@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>SQL Injection Demo</title>
+</head>
+<body>
+  <h1>Login Vulnerável</h1>
+  <form action="http://localhost:3000/login-vulnerable" method="POST">
+    <label>Usuário:</label><br />
+    <input type="text" name="username"><br />
+    <label>Senha:</label><br />
+    <input type="text" name="password"><br />
+    <button type="submit">Login vulnerável</button>
+  </form>
+
+  <hr>
+
+  <h1>Login Seguro</h1>
+  <form action="http://localhost:3000/login-safe" method="POST">
+    <label>Usuário:</label><br />
+    <input type="text" name="username"><br />
+    <label>Senha:</label><br />
+    <input type="text" name="password"><br />
+    <button type="submit">Login seguro</button>
+  </form>
+</body>
+</html>
