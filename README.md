@@ -9,6 +9,7 @@ O objetivo é mostrar, na prática, como uma aplicação mal construída pode pe
 ## 📦 Requisitos
 
 - [Node.js](https://nodejs.org/) instalado
+- Extensão Live server para rodar o index.html
 - Git Bash ou terminal equivalente
 
 ---
