@@ -1,12 +1,20 @@
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 const db = new sqlite3.Database("./db.sqlite");
 
+// Defina a porta para ser a variável de ambiente do Replit (se estiver disponível), ou 3000
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Serve arquivos estáticos, como index.html, da raiz do projeto (diretório atual)
+app.use(express.static(path.join(__dirname)));
+
+// Criação da tabela e inserção de dados (apenas uma vez)
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,14 +37,14 @@ app.post("/login-vulnerable", (req, res) => {
 
     if (rows.length > 0) {
       res.send(`
-          <p>✅ Bem-vindo, ${rows[0].username}!</p>
-          <p><strong>Query SQL executada:</strong><br><code>${query}</code></p>
-        `);
+        <p>✅ Bem-vindo, ${rows[0].username}!</p>
+        <p><strong>Query SQL executada:</strong><br><code>${query}</code></p>
+      `);
     } else {
       res.send(`
-          <p>❌ Credenciais inválidas.</p>
-          <p><strong>Query SQL executada:</strong><br><code>${query}</code></p>
-        `);
+        <p>❌ Credenciais inválidas.</p>
+        <p><strong>Query SQL executada:</strong><br><code>${query}</code></p>
+      `);
     }
   });
 });
@@ -51,26 +59,30 @@ app.post("/login-safe", (req, res) => {
     if (err) return res.status(500).send("Erro no servidor");
 
     const queryInfo = `
-        <p><strong>Query SQL executada:</strong><br><code>${query}</code></p>
-        <p><strong>Valores:</strong><br><code>${JSON.stringify(
-          params
-        )}</code></p>
-      `;
+      <p><strong>Query SQL executada:</strong><br><code>${query}</code></p>
+      <p><strong>Valores:</strong><br><code>${JSON.stringify(params)}</code></p>
+    `;
 
     if (rows.length > 0) {
       res.send(`
-          <p>✅ Bem-vindo, ${rows[0].username}!</p>
-          ${queryInfo}
-        `);
+        <p>✅ Bem-vindo, ${rows[0].username}!</p>
+        ${queryInfo}
+      `);
     } else {
       res.send(`
-          <p>❌ Credenciais inválidas.</p>
-          ${queryInfo}
-        `);
+        <p>❌ Credenciais inválidas.</p>
+        ${queryInfo}
+      `);
     }
   });
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando em http://localhost:3000");
+// Rota 404 para página não encontrada
+app.use((req, res) => {
+  res.status(404).send("Página não encontrada");
+});
+
+// Iniciar o servidor na porta configurada
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
