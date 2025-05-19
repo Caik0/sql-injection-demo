@@ -1,17 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <title>SQL Injection Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ececec;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1,
+    h2 {
+      color: #2c3e50;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #2980b9;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3498db;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      color: #2980b9;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #resposta {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ecf0f1;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      word-wrap: break-word;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Login Vulnerável</h1>
-  <form action="http://localhost:3000/login-vulnerable" method="POST">
-    <label>Usuário:</label><br />
-    <input type="text" name="username"><br />
-    <label>Senha:</label><br />
-    <input type="text" name="password"><br />
-    <button type="submit">Login vulnerável</button>
-  </form>
+  <div class="container">
+    <h1>Varejo do Zé</h1>
+    <form action="http://localhost:3000/login-vulnerable" method="POST">
+      <label>Usuário:</label><br />
+      <input type="text" name="username"><br />
+      <label>Senha:</label><br />
+      <input type="text" name="password"><br />
+      <button type="submit">Login</button>
+    </form>
+  </div>
 </body>
+
 </html>
